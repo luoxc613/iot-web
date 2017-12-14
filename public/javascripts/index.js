@@ -33,7 +33,7 @@ $(document).ready(function () {
   var basicOption = {
     title: {
       display: true,
-      text: 'Temperature & Humidity Real-time Data',
+      text: 'collect data from sensor',
       fontSize: 36
     },
     scales: {
@@ -41,19 +41,11 @@ $(document).ready(function () {
         id: 'Temperature',
         type: 'linear',
         scaleLabel: {
-          labelString: 'Temperature(C)',
+          labelString: 'Data value',
           display: true
         },
         position: 'left',
-      }, {
-          id: 'Humidity',
-          type: 'linear',
-          scaleLabel: {
-            labelString: 'Humidity(%)',
-            display: true
-          },
-          position: 'right'
-        }]
+      }]
     }
   }
 
