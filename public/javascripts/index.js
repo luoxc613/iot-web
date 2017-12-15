@@ -1,7 +1,9 @@
 $(document).ready(function () {
   var timeData = [],
     temperatureData = [],
-    humidityData = [];
+    humidityData = [],
+    timeData1 = [],
+    gasData=[];
   var data = {
     labels: timeData,
     datasets: [
@@ -29,11 +31,27 @@ $(document).ready(function () {
       }
     ]
   }
+  var data1={
+    labels: timeData1,
+    datasets: [
+      {
+        fill: false,
+        label: 'Gas',
+        yAxisID: 'Gas',
+        borderColor: "rgba(255, 204, 0, 1)",
+        pointBoarderColor: "rgba(255, 204, 0, 1)",
+        backgroundColor: "rgba(255, 204, 0, 0.4)",
+        pointHoverBackgroundColor: "rgba(255, 204, 0, 1)",
+        pointHoverBorderColor: "rgba(255, 204, 0, 1)",
+        data: gasData
+      }
+    ]
+  }
 
   var basicOption = {
     title: {
       display: true,
-      text: 'collect data from sensor',
+      text: 'Temperature & Humidity Real-time Data',
       fontSize: 36
     },
     scales: {
@@ -54,6 +72,24 @@ $(document).ready(function () {
           },
           position: 'right'
         }]
+    }
+  }
+  var basicOption1 = {
+    title: {
+      display: true,
+      text: 'Gas Real-time Data',
+      fontSize: 36
+    },
+    scales: {
+      yAxes: [{
+        id: 'Gas',
+        type: 'linear',
+        scaleLabel: {
+          labelString: 'Gas',
+          display: true
+        },
+        position: 'left',
+      }]
     }
   }
 
@@ -95,6 +131,41 @@ $(document).ready(function () {
       }
 
       myLineChart.update();
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  var ctx1 = document.getElementById("myChart1").getContext("2d");
+  var optionsNoAnimation1= { animation: false }
+  var myLineChart1 = new Chart(ctx, {
+    type: 'line',
+    data: data1,
+    options: basicOption1
+  });
+
+  var ws1 = new WebSocket('wss://' + location.host);
+  ws1.onopen = function () {
+    console.log('Successfully connect WebSocket');
+  }
+  ws1.onmessage = function (message) {
+    console.log('receive message' + message.data);
+    try {
+      var obj1 = JSON.parse(message.data);
+      if(!obj1.time || !obj1.gas) {
+        return;
+      }
+      timeData1.push(obj1.time);
+      gasData.push(obj1.gas);
+      // only keep no more than 50 points in the line chart
+      const maxLen1 = 50;
+      var len1 = timeData1.length;
+      if (len1 > maxLen1) {
+        timeData1.shift();
+        gasData.shift();
+      }
+
+      myLineChart1.update();
     } catch (err) {
       console.error(err);
     }
