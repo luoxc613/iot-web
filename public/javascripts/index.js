@@ -32,7 +32,7 @@ $(document).ready(function () {
     ]
   }*/
   var data1={
-    labels: timeData1,
+    labels: timeData,
     datasets: [
       {
         fill: false,
