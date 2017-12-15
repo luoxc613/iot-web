@@ -41,11 +41,19 @@ $(document).ready(function () {
         id: 'Temperature',
         type: 'linear',
         scaleLabel: {
-          labelString: 'Data value',
+          labelString: 'Temperature(C)',
           display: true
         },
         position: 'left',
-      }]
+      }, {
+          id: 'Humidity',
+          type: 'linear',
+          scaleLabel: {
+            labelString: 'Humidity(%)',
+            display: true
+          },
+          position: 'right'
+        }]
     }
   }
 
