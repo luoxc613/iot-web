@@ -19,6 +19,7 @@
 <script>
  var ws = new WebSocket('wss://' + location.host);
   ws.onopen = function () {
+  	alert("Successfully");
     console.log('Successfully connect WebSocket');
   }
   ws.onmessage = function (message) {
