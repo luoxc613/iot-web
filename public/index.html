@@ -10,9 +10,8 @@
 
 <body>
     <canvas id="myChart" width="400" height="150"></canvas>
-    <div id="div1">
-    
-    </div>
+    <img id="div1" src=""/>
+  
 
 <script>
  var ws = new WebSocket('wss://' + location.host);
@@ -24,14 +23,11 @@
     try {
       var obj = JSON.parse(message.data);
 
-
-d1.appendChild(img);
 	var element=document.getElementById("div1");
-	var img=document.createElement("img");
 	if(obj.vib>1023)
-		img.src="https://thumbs.dreamstime.com/z/%E5%9C%B0%E9%9C%87%E8%AD%A6%E6%8A%A5%E4%BF%A1%E5%8F%B7-37503144.jpg";
+		element.src="https://thumbs.dreamstime.com/z/%E5%9C%B0%E9%9C%87%E8%AD%A6%E6%8A%A5%E4%BF%A1%E5%8F%B7-37503144.jpg";
     else
-    	img.src="http://www.safe-project.eu/SAFE-Project-Dateien/Logo_SAFE.PNG";
+    	element.src="http://www.safe-project.eu/SAFE-Project-Dateien/Logo_SAFE.PNG";
     } catch (err) {
       console.error(err);
     }
