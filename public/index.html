@@ -9,8 +9,32 @@
 </head>
 
 <body>
-    <canvas id="myChart" width="400" height="150">
+    <canvas id="myChart" width="400" height="150"></canvas>
+    <p1 id="div1">
     
+    </p1>
+
+<script>
+ var ws = new WebSocket('wss://' + location.host);
+  ws.onopen = function () {
+    console.log('Successfully connect WebSocket');
+  }
+  ws.onmessage = function (message) {
+    console.log('receive message' + message.data);
+    try {
+      var obj = JSON.parse(message.data);
+	var element=document.getElementById("div1");
+	if(obj.vib>1023)
+		element.innerHTML="dangerous";
+    else
+    	element.innerHTML="safe";
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+</script>
+
 </body>
 
 </html>

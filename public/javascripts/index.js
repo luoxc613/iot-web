@@ -129,7 +129,7 @@ $(document).ready(function () {
       console.error(err);
     }
   }
-
+ 
  /* var ctx1 = document.getElementById("myChart1").getContext("2d");
   var optionsNoAnimation1= { animation: false }
   var myLineChart1 = new Chart(ctx1, {
