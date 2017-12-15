@@ -25,7 +25,10 @@
 
 	var element=document.getElementById("div1");
 	if(obj.vib>1023)
-		element.src="https://thumbs.dreamstime.com/z/%E5%9C%B0%E9%9C%87%E8%AD%A6%E6%8A%A5%E4%BF%A1%E5%8F%B7-37503144.jpg";
+		{
+			element.src="https://thumbs.dreamstime.com/z/%E5%9C%B0%E9%9C%87%E8%AD%A6%E6%8A%A5%E4%BF%A1%E5%8F%B7-37503144.jpg";
+			alert("Warning Earthquake!!!!");
+		}
     else
     	element.src="http://www.safe-project.eu/SAFE-Project-Dateien/Logo_SAFE.PNG";
     } catch (err) {
