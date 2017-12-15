@@ -31,7 +31,7 @@ $(document).ready(function () {
       }
     ]
   }
-  var data1={
+  /*var data1={
     labels: timeData1,
     datasets: [
       {
@@ -47,7 +47,7 @@ $(document).ready(function () {
       }
     ]
   }
-
+*/
   var basicOption = {
     title: {
       display: true,
@@ -74,7 +74,7 @@ $(document).ready(function () {
         }]
     }
   }
-  var basicOption1 = {
+/*  var basicOption1 = {
     title: {
       display: true,
       text: 'Gas Real-time Data',
@@ -91,7 +91,7 @@ $(document).ready(function () {
         position: 'left',
       }]
     }
-  }
+  }*/
 
   //Get the context of the canvas element we want to select
   var ctx = document.getElementById("myChart").getContext("2d");
@@ -136,7 +136,7 @@ $(document).ready(function () {
     }
   }
 
-  var ctx1 = document.getElementById("myChart1").getContext("2d");
+ /* var ctx1 = document.getElementById("myChart1").getContext("2d");
   var optionsNoAnimation1= { animation: false }
   var myLineChart1 = new Chart(ctx1, {
     type: 'line',
@@ -169,5 +169,5 @@ $(document).ready(function () {
     } catch (err) {
       console.error(err);
     }
-  }
+  }*/
 });
