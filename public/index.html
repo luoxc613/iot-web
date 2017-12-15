@@ -40,6 +40,12 @@
     else
     	if(obj.temperature<40&&obj.temperature>=30)
     		element.src="http://www.girdear.cn/images/201707/goods_img/2234_thumb_G_1500599924092.jpg";
+    else
+    	if(obj.temperature>=40)
+    		｛
+    			element.src="http://d.ifengimg.com/mw640_q75/p3.ifengimg.com/yidian/2016_33/add0b75a7503383_w438_h266.jpg";
+    			 alert("Warming Fire！！！");
+    		｝
     } catch (err) {
       console.error(err);
     }
