@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Temperature &amp; Humidity live data</title>
+    <title>sensor data</title>
     <script src="javascripts/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="javascripts/Chart.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="javascripts/index.js" type="text/javascript" charset="utf-8"></script>
@@ -14,7 +14,9 @@
     <p id="p1"></p>
     <p>Clothing recommendations：</p>
     <img id="div1" src="" width="300" height="300"/>
-    <script>
+  
+
+<script>
  var ws = new WebSocket('wss://' + location.host);
   ws.onopen = function () {
     console.log('Successfully connect WebSocket');
@@ -23,11 +25,10 @@
     console.log('receive message' + message.data);
     try {
       var obj = JSON.parse(message.data);
-
-	var element=document.getElementById("p");
-	element.innerHTML="current temperature :"+obj.temperature;
-	var element=document.getElementById("p1");
-	element.innerHTML="current Humidity :"+obj.humidity;
+      var element0=document.getElementById("p");
+	element0.innerHTML="current temperature :"+obj.temperature;
+	var element1=document.getElementById("p1");
+	element1.innerHTML="current Humidity :"+obj.humidity;
 	var element=document.getElementById("div1");
 	if(obj.temperature<10)
 		element.src="https://img.yzcdn.cn/upload_files/2016/11/23/147987962434562218.jpg";
@@ -52,6 +53,7 @@
   }
 
 </script>
+
 </body>
-	
+
 </html>
