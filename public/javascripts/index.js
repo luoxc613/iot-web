@@ -3,7 +3,7 @@ $(document).ready(function () {
     temperatureData = [],
     humidityData = [],
     timeData1 = [],
-    gasData=[];
+    vibData=[];
  /* var data = {
     labels: timeData,
     datasets: [
@@ -36,14 +36,14 @@ $(document).ready(function () {
     datasets: [
       {
         fill: false,
-        label: 'Gas',
-        yAxisID: 'Gas',
+        label: 'Vibration',
+        yAxisID: 'Vibration',
         borderColor: "rgba(255, 204, 0, 1)",
         pointBoarderColor: "rgba(255, 204, 0, 1)",
         backgroundColor: "rgba(255, 204, 0, 0.4)",
         pointHoverBackgroundColor: "rgba(255, 204, 0, 1)",
         pointHoverBorderColor: "rgba(255, 204, 0, 1)",
-        data: gasData
+        data: vibData
       }
     ]
   }
@@ -77,15 +77,15 @@ $(document).ready(function () {
   var basicOption1 = {
     title: {
       display: true,
-      text: 'Gas Real-time Data',
+      text: 'Vibration Real-time Data',
       fontSize: 36
     },
     scales: {
       yAxes: [{
-        id: 'Gas',
+        id: 'Vibration',
         type: 'linear',
         scaleLabel: {
-          labelString: 'Gas',
+          labelString: 'Vibration',
           display: true
         },
         position: 'left',
@@ -110,17 +110,17 @@ $(document).ready(function () {
     console.log('receive message' + message.data);
     try {
       var obj = JSON.parse(message.data);
-      if(!obj.time || !obj.gas) {
+      if(!obj.time || !obj.vib) {
         return;
       }
       timeData.push(obj.time);
-      gasData.push(obj.gas);
+      vibData.push(obj.vib);
       // only keep no more than 50 points in the line chart
       const maxLen = 50;
       var len = timeData.length;
       if (len > maxLen) {
         timeData.shift();
-        gasData.shift();
+        vibData.shift();
       }
 
       
