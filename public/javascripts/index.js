@@ -4,7 +4,7 @@ $(document).ready(function () {
     humidityData = [],
     timeData1 = [],
     gasData=[];
-  var data = {
+ /* var data = {
     labels: timeData,
     datasets: [
       {
@@ -30,8 +30,8 @@ $(document).ready(function () {
         data: humidityData
       }
     ]
-  }
-  /*var data1={
+  }*/
+  var data1={
     labels: timeData1,
     datasets: [
       {
@@ -47,7 +47,7 @@ $(document).ready(function () {
       }
     ]
   }
-*/
+/*
   var basicOption = {
     title: {
       display: true,
@@ -73,8 +73,8 @@ $(document).ready(function () {
           position: 'right'
         }]
     }
-  }
-/*  var basicOption1 = {
+  }*/
+  var basicOption1 = {
     title: {
       display: true,
       text: 'Gas Real-time Data',
@@ -91,15 +91,15 @@ $(document).ready(function () {
         position: 'left',
       }]
     }
-  }*/
+  }
 
   //Get the context of the canvas element we want to select
   var ctx = document.getElementById("myChart").getContext("2d");
   var optionsNoAnimation = { animation: false }
   var myLineChart = new Chart(ctx, {
     type: 'line',
-    data: data,
-    options: basicOption
+    data: data1,
+    options: basicOption1
   });
 
   var ws = new WebSocket('wss://' + location.host);
@@ -110,26 +110,20 @@ $(document).ready(function () {
     console.log('receive message' + message.data);
     try {
       var obj = JSON.parse(message.data);
-      if(!obj.time || !obj.temperature) {
+      if(!obj.time || !obj.gas) {
         return;
       }
       timeData.push(obj.time);
-      temperatureData.push(obj.temperature);
+      gasData.push(obj.gas);
       // only keep no more than 50 points in the line chart
       const maxLen = 50;
       var len = timeData.length;
       if (len > maxLen) {
         timeData.shift();
-        temperatureData.shift();
+        gasData.shift();
       }
 
-      if (obj.humidity) {
-        humidityData.push(obj.humidity);
-      }
-      if (humidityData.length > maxLen) {
-        humidityData.shift();
-      }
-
+      
       myLineChart.update();
     } catch (err) {
       console.error(err);
