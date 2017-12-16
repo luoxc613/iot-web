@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>sensor data</title>
+    <title>Temperature &amp; Humidity live data</title>
     <script src="javascripts/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="javascripts/Chart.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="javascripts/index.js" type="text/javascript" charset="utf-8"></script>
@@ -10,10 +10,11 @@
 
 <body>
     <canvas id="myChart" width="400" height="150"></canvas>
+    <p id="p"> </p>
+    <p id="p1"></p>
+    <p>Clothing recommendations：</p>
     <img id="div1" src="" width="300" height="300"/>
-  
-
-<script>
+    <script>
  var ws = new WebSocket('wss://' + location.host);
   ws.onopen = function () {
     console.log('Successfully connect WebSocket');
@@ -23,21 +24,34 @@
     try {
       var obj = JSON.parse(message.data);
 
+	var element0=document.getElementById("p");
+	element0.innerHTML="current temperature :"+obj.temperature;
+	var element1=document.getElementById("p1");
+	element1.innerHTML="current Humidity :"+obj.humidity;
 	var element=document.getElementById("div1");
-	if(obj.vib==1)
-		{
-			element.src="https://thumbs.dreamstime.com/z/%E5%9C%B0%E9%9C%87%E8%AD%A6%E6%8A%A5%E4%BF%A1%E5%8F%B7-37503144.jpg";
-			alert("Warning Earthquake!!!!");
-		}
+	if(obj.temperature<20)
+		element.src="https://img.yzcdn.cn/upload_files/2016/11/23/147987962434562218.jpg";
     else
-    	element.src="http://www.safe-project.eu/SAFE-Project-Dateien/Logo_SAFE.PNG";
+    	if(obj.temperature<25&&obj.temperature>=20)
+    	element.src="https://thumbs.dreamstime.com/b/%E7%BC%96-%E7%BE%8A%E6%AF%9B%E6%AF%9B%E7%BA%BF%E8%A1%A3%EF%BC%8C%E6%8C%AA%E5%A8%81-30971701.jpg";
+    else
+    	if(obj.temperature<26&&obj.temperature>=25)
+    	element.src="https://gw.alicdn.com/bao/uploaded/i3/TB1jhzASpXXXXXWXpXXXXXXXXXX_!!0-item_pic.jpg_230x230.jpg";
+    else
+    	if(obj.temperature<27&&obj.temperature>=26)
+    		element.src="http://www.girdear.cn/images/201707/goods_img/2234_thumb_G_1500599924092.jpg";
+    else
+    	if(obj.temperature>=27)
+    		{
+    			element.src="http://d.ifengimg.com/mw640_q75/p3.ifengimg.com/yidian/2016_33/add0b75a7503383_w438_h266.jpg";
+    			 alert("Warming Fire！！！");
+                }
     } catch (err) {
       console.error(err);
     }
   }
 
 </script>
-
 </body>
-
+	
 </html>
